@@ -8,6 +8,21 @@
 
 # 🔥 WEB-PLAYER - Беспланый веб-плеер! v: 1.0.0 🔥
 
+
+![banner](https://github.com/DataSC3/web-player/assets/68002888/e8974656-dc65-4735-9211-528a9b2081e5)
+
+
+## 💻 ПК ВЕРСИЯ:
+https://github.com/DataSC3/web-player/assets/68002888/7cfef11f-07b7-4396-80b6-47daf3862faf
+
+## 📱 МОБИЛЬНАЯ ВЕРСИЯ:
+https://github.com/DataSC3/web-player/assets/68002888/29bb6d3b-9a7f-4990-b49e-39cdcd1ab771
+
+ 
+
+
+
+
 <video width="320" height="240" controls>
   <source src="src/git-resources/music-player-pc.mp4" type="video/mp4">
   Ваш браузер не поддерживает видео.
