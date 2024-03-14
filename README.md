@@ -8,6 +8,10 @@
 
 # 🔥 WEB-PLAYER - Беспланый веб-плеер! v: 1.0.0 🔥
 
+<video width="320" height="240" controls>
+  <source src="src/git-resources/music-player-pc.mp4" type="video/mp4">
+  Ваш браузер не поддерживает видео.
+</video>
 
 
 ### **🔖 Функционал плеера:**
@@ -121,11 +125,11 @@ sudo pacman -Syu git python3 && git clone https://github.com/DataSC3/web-player.
 ```
 ---
 
-## **⚙️ Запуск:**
+## **⏳ Запуск:**
 - Скачайте [репозиторий](https://github.com/DataSC3/web-player/archive/master.zip) и распакуйте в удобное место.
 
 
-
+----
 # ⚙️ НАСТРОЙКИ
 
 ### **📑 src/config.py:**
