@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1 class="program-name"><b><span style="color: orange">MY</span> PLAYEER</b></h1>
+            <p class="program-description">
+                Бесплатный веб-сервис для потокового воспроизведения собственных песен. От разработчика 
+                <a style="text-decoration: none; color: rgb(63, 114, 232);" href="https://github.com/DataSC3">DataSC3.</a>
+            </p>
+            <!-- <br> -->
+            <p class="status-block">
+                <span class="loading" id="status-loading"></span>
+                <img id="status-text-icon" src="/static/icon/status-true.svg" width="20px"> 
+                <span class="status-text">{{status_text}}</span>
+            </p>
+            
+        </div>
+        <div class="playeer-menu">
+            {% if not songs %}
+            <input class="search-input" type="text" placeholder="Введите ссылку на YouTube трек:">
+            
+            <div class="line"></div>
+            <div class="search-forward" id="search-forward" onclick="showSearchBlock()"><img src="/static/icon/search.svg" width="30"></div>
+            <div class="close-forward" onclick="hideSearchBlock()" style="display: none; background-color: rgba(0, 0, 0, 0.2); border-radius: 8px;"><img src="/static/icon/close.svg" width="30"></div>
+
+            <div class="mix-forward" style="opacity: 0.3;"><img src="/static/icon/mix.svg" width="30"></div>
+            <div class="update" onclick="window.location.href = '/';" ><img src="/static/icon/update.svg" width="30"></div>
+            <div class="music-count" style="opacity: 0.3;">
+                <img src="/static/icon/music.svg" style="cursor: default;" width="30">
+                <div class="music-count-data-block">
+                    <span class="music-count-text">{{ music_count }}</span>
+                    <span class="music-size-text">{{ music_size }}</span>
+                </div>
+            </div>
+            <!-- <div class="stop-forward" style="opacity: 0.3;"><img src="/static/icon/stop.svg" width="30"></div> -->
+            <!-- <div class="right-forward" onclick=""><img src="/static/icon/right.svg" style="opacity: 0.3;" width="30"></div> -->
+            {% else %}
+            
+            <input class="search-input" type="text" placeholder="Введите ссылку на YouTube трек:">
+
+            <div class="line"></div>
+            
+            <!-- КНОПКА ПЕРЕКЛЮЧЕНИЕ ТРЕКОВ И ПАУЗА / ПЛЕЙ -->
+            <!-- <div class="right-block" style="display: flex; align-items: center; justify-content: space-around; width: 13%;"></div> -->
+            <!-- <div class="stop-forward" onclick="stopStartAudio()"><img src="/static/icon/stop.svg" width="30"></div> -->
+            
+            <div class="search-forward" id="search-forward" onclick="showSearchBlock()"><img src="/static/icon/search.svg" width="30"></div>
+            <div class="close-forward" onclick="hideSearchBlock()" style="display: none; background-color: rgba(0, 0, 0, 0.2); border-radius: 8px;"><img src="/static/icon/close.svg" width="30"></div>
+            
+            <!-- ДОБВАИТЬ СЮДА -->
+            <div class="mix-forward" onclick="window.location.href = '/mix-track';"><img src="/static/icon/mix.svg" width="30"></div>
+            <div class="update" onclick="window.location.href = '/';" ><img src="/static/icon/update.svg" width="30"></div>
+            <div class="music-count">
+                <img src="/static/icon/music.svg" style="cursor: default;" width="30">
+                <div class="music-count-data-block">
+                    <span class="music-count-text">{{ music_count }}</span>
+                    <span class="music-size-text">{{ music_size }}</span>
+                </div>
+            </div>
+            
+            {% endif %}
+        </div>
+
+        <div class="music-block">
+            <div class="playeer">
+                {% if not songs %}
+                <div class="playeer-item">
+                    <div class="playeer-header" style="margin-bottom: 0; display: flex; justify-content: center; align-items: center;">
+                        <span class="music-name">В КАТАЛОГЕ ОТСУТСТВУЮТ ПЕСНИ!.</span>
+                    </div>
+                </div>    
+                {% endif %}
+                {% for song in songs %}
+                <div class="playeer-item">
+                    <div class="playeer-header"> 
+                        <span class="music-name">{{ song[0].upper().replace(status_yt, "").replace(".MP3", "")}} </span>
+                        <div class="control-buttons">
+                            {% if status_yt in song[0] %}
+                                <span class="youtube-music"><img src="/static/icon/youtube.svg" style="cursor: default;" width="20px"></span>
+                            {% else %}    
+                                <span class="youtube-music"><img src="/static/icon/local.svg" style="cursor: default;" width="20px"></span>
+                            {% endif %}    
+                            <span class="delete-music" onclick="deleteFile(this, '{{ song[1] }}')"><img src="/static/icon/delete.svg" width="20px"></span>
+                            <span class="loading"></span>
+                        </div>
+                    
+                    </div>
+                    <audio controls id="audioPlayeer_{{ loop.index }}" class="audioPlayer" data-src="/music/{{ song[1] }}" style="background-color: rgb(112, 112, 112); border-radius: 10px; width: 100%;">
+                        <source type="audio/mpeg">
+                        Ваш браузер не поддерживает элемент audio.
+                        <!-- src="/music/{{ song[1] }}" -->
+                    </audio>
+                </div>
+                {% endfor %}
+                
+            </div>
+            <script src="/static/functions.js"></script>
+        </div>
+    </div>
+</body>
+</html>
