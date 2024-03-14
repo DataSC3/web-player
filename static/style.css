@@ -1,0 +1,187 @@
+body {
+  background-color: rgb(28, 28, 28);
+  color: aliceblue;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; 
+
+}
+
+img {cursor: pointer;}
+
+
+.wrapper {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: rgba(103, 103, 103, 0.06);
+  padding: 20px;
+  border-radius: 10px;
+  border: 0.1px solid rgba(255, 255, 255, 0.09);
+}
+
+.status-block {
+  font-family: Avenir Next;
+  color: rgba(255, 255, 255, 0.72);
+  display: flex;
+  align-items: center;
+} 
+
+.status-text {
+  margin-left: 10px;
+  border-left: 0.1px solid rgba(255, 255, 255, 0.07);
+  padding-left: 10px;
+}
+
+
+
+.program-description {
+  margin-bottom: 25px;
+  width: 60%;
+  font-family: Avenir Next;
+  color: rgba(240, 248, 255, 0.49);
+}
+
+/* .header {
+  display: flex;
+  justify-content: space-around;
+}*/
+
+
+.playeer-menu {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background: rgba(61, 150, 255, 0.5);
+  border-radius: 5px;
+  align-items: center;
+}
+
+.playeer-item {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+
+  padding: 12px;
+  background: rgba(158, 158, 158, 0.1);
+  border-radius: 5px;
+}
+
+.playeer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 15px;
+}
+
+.music-name {
+  font-family: Avenir Next;
+  color: rgba(255, 255, 255, 0.47);
+  width: 100%;
+}
+
+.delete-music {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
+}
+
+.search-input {
+  display: none;
+  border: none;
+  background: none;
+  width: 85%;
+  padding-left: 5px;
+  outline: none;
+  color: rgba(240, 248, 255, 0.905);
+  font-family: Avenir Next;
+}
+
+.line {
+  display: none;
+  width: 1px;
+  height: 30px;
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: rgba(255, 255, 255, 0.16);
+}
+
+input::placeholder {
+  color: aliceblue;
+}
+
+.loading {
+  display: none;
+  border: 4px solid rgba(0, 0, 0, 0);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+.control-buttons {
+  display: flex; 
+  justify-content: space-between; 
+  width: 60px; 
+  align-items: end;
+  margin-left: 10px;
+  /* margin-right: 10px; */
+}
+
+.youtube-music {
+  opacity: 0.3;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+}
+
+.music-count {
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+
+.music-count-data-block {
+  font-size: 70%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  font-family: Futura;
+  opacity: 0.7;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* Стили для мобильных устройств */
+@media only screen and (max-width: 768px) {
+  .wrapper {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background: none;
+    padding: 20px;
+    border-radius: 10px;
+    border: none;
+  }
+  .program-description {
+    margin-bottom: 30px;
+    width: 90%;
+  }
+  .close-forward {
+    margin-left: 10px;
+  }
+  .playeer-menu {
+    justify-content: space-around;
+  }
+  .search-input {
+    font-size: 85%;
+  }
+
+}
