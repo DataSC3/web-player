@@ -34,7 +34,7 @@
 </video>
 
 ## 💬 ЛОГИРОВАНИЕ
-[Логирование](https://vimeo.com/1006036396?share=copy)
+[![Логирование](https://previews.dropbox.com/p/thumb/ACYCgBWiJBsyJBnNApKutNW7gffDro0IsBbmvIkauXCj_YVgRadASPTT9Yp8mFfzhlO7K_X4mpL1ogOLIjUPZ3X0Eef1yy8FsWEWNAZcpMNyBhnc24HtuRuSc1v8WInwXAsAGImiI9Ts2oDohL1W5t_eeIIxcQOjv934cfr2uzq6BiyLftj_2pNjNhGCUSoT9i6UnhTLJZMYLPrMJ8u91QBA8JuVeeN6XhLc2xKKeqOJE6j7Q4mXy-L45lhA5OuwO93_Iq9x_zBwBR_4yozeLG5hPHvKNhEW9wd7uUZb-bbOomVvlEYPQi-I9zajbsn70wAEnAvGC3qJ6PCwOUJIo7Ss/p.png?is_prewarmed=true)](https://vimeo.com/1006036396?share=copy)
 <video width="640" height="480" controls>
   <source src="https://www.dropbox.com/scl/fi/023euydf209ixk2x5ny36/logging.mp4?rlkey=r7yip4i3qi0ffrwpw9dhmmvwp&st=71560l2a&raw=1" type="video/mp4">
   Ваш браузер не поддерживает встроенные видео.
