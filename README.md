@@ -15,7 +15,7 @@
 ## 💻 ПК ВЕРСИЯ:
 [ПК Версия](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/pc-version.mp4)
 <video width="640" height="480" controls>
-  <source src="src/git-resources/pc-version.mp4" type="video/mp4">
+  <source src="https://github.com/DataSC3/web-player/blob/main/src/git-resurces/pc-version.mp4" type="video/mp4">
   Ваш браузер не поддерживает встроенные видео.
 </video>
 
