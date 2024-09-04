@@ -34,7 +34,7 @@
 </video>
 
 ## 💬 ЛОГИРОВАНИЕ
-[Логирование](src/git-resources/logging.mp4)
+[Логирование](https://vimeo.com/1006036396?share=copy)
 <video width="320" height="240" controls>
   <source src="src/git-resources/logging.mp4" type="video/mp4">
   Ваш браузер не поддерживает видео.
