@@ -13,22 +13,16 @@
 
 
 ## 💻 ПК ВЕРСИЯ:
-[![ПК Версия](src/git-resurces/pc-pic.png)]()
+[![ПК Версия / Видео](src/git-resurces/pc-pic.png)](https://www.dropbox.com/scl/fi/grg4t72b9wp0bqsxzlzjf/pc-version.mp4?rlkey=4qtq3r8yykmisuflv9tcy47ds&st=a9l5qlxk&dl=0)
 
 ## 📱 МОБИЛЬНАЯ ВЕРСИЯ:
-[![Мобильная Версия](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/mobile-pic.png)](src/git-resources/mobile-version.mp4)
-<video width="320" height="240" controls>
-  <source src="src/git-resources/mobile-version.mp4" type="video/mp4">
-  Ваш браузер не поддерживает видео.
-</video>
+[![Мобильная Версия / Видео](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/mobile-pic.png)](https://www.dropbox.com/scl/fi/vni4xen9m1rmf4fanfffz/mobile-version.mp4?rlkey=ap0wkllawarn7gvinmsev0ik2&st=nd2joest&dl=0)
 
 ## 🚀 ЗАПУСК
-[![Запуск](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/start-pic.png)](src/git-resources/start.mp4)
-
-
+[![Запуск / Видео](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/start-pic.png)](https://www.dropbox.com/scl/fi/hsxbpbpv1ms3s39xhojq1/start.mp4?rlkey=8xwsidlpmeg5o2hdwrzsvnwji&st=v625la27&dl=0)
 
 ## 💬 ЛОГИРОВАНИЕ
-[![Логирование](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/logging-pic.png)](https://www.dropbox.com/scl/fi/023euydf209ixk2x5ny36/logging.mp4?rlkey=r7yip4i3qi0ffrwpw9dhmmvwp&st=q0std5ax&dl=0)
+[![Логирование / Видео](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/logging-pic.png)](https://www.dropbox.com/scl/fi/023euydf209ixk2x5ny36/logging.mp4?rlkey=r7yip4i3qi0ffrwpw9dhmmvwp&st=q0std5ax&dl=0)
 
 
 ### **🔖 Функционал плеера:**
