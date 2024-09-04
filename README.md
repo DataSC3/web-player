@@ -1,30 +1,38 @@
 <meta property="og:title" content="web-player">
-<meta property="og:description" content="Бесплатный веб-сервис для потокового воспроизведения собственных песен. От разработчика DataSC3.">
+<meta property="og:description" content="Бесплатный веб-сервис для потокового воспроизведения собственных и сторонних песен, ПОДДЕРЖИВАЕТ YOUTUBE. От разработчика DataSC3.">
 <meta property="og:image" content="src/git-resurces/banner.png">
 <meta name="author" content="FELIX4">
 <meta name="keywords" content="Python web-player - Бесплатный веб-плеер.">
 
-<img src="src/git-resurces/player-icon.png" width="40" height="40">
-
-# 🔥 WEB-PLAYER - Беспланый веб-плеер! v: 1.0.0 🔥
 
 
-![banner](https://github.com/DataSC3/web-player/assets/68002888/e8974656-dc65-4735-9211-528a9b2081e5)
+# 🔥 WEB-PLAYER - Беспланый веб-плеер! v: 1.0.1 🔥
+
+
+![banner](src/git-resurces/banner.png)
 
 
 ## 💻 ПК ВЕРСИЯ:
-https://github.com/DataSC3/web-player/assets/68002888/7cfef11f-07b7-4396-80b6-47daf3862faf
+<video width="320" height="240" controls>
+  <source src="src/git-resources/pc-version.mp4" type="video/mp4">
+  Ваш браузер не поддерживает видео.
+</video>
 
 ## 📱 МОБИЛЬНАЯ ВЕРСИЯ:
-https://github.com/DataSC3/web-player/assets/68002888/29bb6d3b-9a7f-4990-b49e-39cdcd1ab771
-
- 
-
-
-
-
 <video width="320" height="240" controls>
-  <source src="src/git-resources/music-player-pc.mp4" type="video/mp4">
+  <source src="src/git-resources/mobile-version.mp4" type="video/mp4">
+  Ваш браузер не поддерживает видео.
+</video>
+
+## 🚀 ЗАПУСК
+<video width="320" height="240" controls>
+  <source src="src/git-resources/start.mp4" type="video/mp4">
+  Ваш браузер не поддерживает видео.
+</video>
+
+## 💬 ЛОГИРОВАНИЕ
+<video width="320" height="240" controls>
+  <source src="src/git-resources/logging.mp4" type="video/mp4">
   Ваш браузер не поддерживает видео.
 </video>
 
@@ -35,14 +43,20 @@ https://github.com/DataSC3/web-player/assets/68002888/29bb6d3b-9a7f-4990-b49e-39
     * Перемешка треков;
     * Импорт через YouTube (скачивание);
     * Информация о треках;
-    * Идентификация трека: 
+    * Таймер сна;
+
+    * Идентификация трека:
     - Указывает откуда воспроизводится трек, через локальное хранилище или трек скаченный через YouTube.
 
-    —— 2024.03.14
+    * Создание и использование аккаунтов:
+    - При вводе какого-либо имени аккаунта, сервер найдет эту дирректорию. Если не найдет то создаст его по указанному пути (MUSIC_PATH).
+
+    * Логирование в консоль:
+    - При включении логирования, сервер будет писать в консоль о каждом своем шаге.
+
+    —— 2024.09.02
 
 ### **🌟 В будущем будет:**
-    * Таймер сна;
-    * Система аутентификации;
     * Темная / Светлая тема.
     
     —— FUTURE
@@ -65,12 +79,12 @@ https://github.com/DataSC3/web-player/assets/68002888/29bb6d3b-9a7f-4990-b49e-39
 5. cd web-player
 6. python3 setup.py
 7. НАСТРАИВАЕМ ФАЙЛ src/config.py ЗАТЕМ ЗАПУСКАЕМ
-8. python3 main.py
+8. python3 start.py
 ```
 
 ##### ИЛИ МОЖЕТЕ СКОПИРОВАТЬ ЭТО, И ВСТАВИТЬ. 
 ```Bash
-pkg update -y && upgrade -y && pkg install git -y python3 -y && pkg install python3-pip && git clone https://github.com/DataSC3/web-player.git && cd web-player && python3 setup.py
+pkg update -y && upgrade -y && pkg install git -y python3 -y && pkg install python3-pip && git clone https://github.com/DataSC3/web-player.git && cd web-player && python3 setup.py && python3 start.py
 ```
 
 
@@ -83,12 +97,12 @@ pkg update -y && upgrade -y && pkg install git -y python3 -y && pkg install pyth
 5. cd web-player
 6. python3 setup.py
 7. НАСТРАИВАЕМ ФАЙЛ src/config.py ЗАТЕМ ЗАПУСКАЕМ
-8. python3 main.py
+8. python3 start.py
 ```
 
 ##### ИЛИ МОЖЕТЕ СКОПИРОВАТЬ ЭТО, И ВСТАВИТЬ. 
 ```Bash
-sudo apt-get install git && sudo apt-get install python3 && git clone https://github.com/DataSC3/web-player.git && cd web-player && python3 setup.py
+sudo apt-get install git && sudo apt-get install python3 && git clone https://github.com/DataSC3/web-player.git && cd web-player && python3 setup.py && python3 start.py
 ```
 
 
@@ -101,12 +115,12 @@ sudo apt-get install git && sudo apt-get install python3 && git clone https://gi
 4. cd web-player
 5. python3 setup.py
 6. НАСТРАИВАЕМ ФАЙЛ src/config.py ЗАТЕМ ЗАПУСКАЕМ
-7. python3 main.py
+7. python3 start.py
 ```
 
 ##### ИЛИ МОЖЕТЕ СКОПИРОВАТЬ ЭТО, И ВСТАВИТЬ. 
 ```Bash
-sudo apt-get install git && sudo apt-get install python3 && git clone https://github.com/DataSC3/web-player.git && cd web-player && python3 setup.py
+sudo apt-get install git && sudo apt-get install python3 && git clone https://github.com/DataSC3/web-player.git && cd web-player && python3 setup.py && python3 start.py
 ```
 
 
@@ -118,12 +132,12 @@ sudo apt-get install git && sudo apt-get install python3 && git clone https://gi
 3. cd web-player
 4. python3 setup.py
 5. НАСТРАИВАЕМ ФАЙЛ src/config.py ЗАТЕМ ЗАПУСКАЕМ
-6. python3 main.py
+6. python3 start.py
 ```
 
 ##### ИЛИ МОЖЕТЕ СКОПИРОВАТЬ ЭТО, И ВСТАВИТЬ.
 ```Bash
-sudo pacman -Syu git python3 && git clone https://github.com/DataSC3/web-player.git && cd web-player && python3 setup.py
+sudo pacman -Syu git python3 && git clone https://github.com/DataSC3/web-player.git && cd web-player && python3 setup.py && python3 start.py
 ```
 
 
@@ -136,7 +150,8 @@ sudo pacman -Syu git python3 && git clone https://github.com/DataSC3/web-player.
 1. cd web-player
 2. python3 setup.py
 3. НАСТРАИВАЕМ ФАЙЛ src/config.py ЗАТЕМ ЗАПУСКАЕМ
-4. python3 main.py
+4. python3 start.py
+
 ```
 ---
 
@@ -148,27 +163,36 @@ sudo pacman -Syu git python3 && git clone https://github.com/DataSC3/web-player.
 # ⚙️ НАСТРОЙКИ
 
 ### **📑 src/config.py:**
-    * MUSIC_PATH = "путь к директория треков (static/music) по умолчанию";
+    * MUSIC_PATH = "путь к директории с треками (static/music/) по умолчанию";
+
     * HOST, PORT = "localhost", 9000 (Настройки сети (Хост, Порт)) по умолчанию;
+
     - Для подключения плеера к домену, важно указать HOST="вашДомен", PORT=80 или 443;
     
     * STATUS_COUNT_FILE = "Путь к файлу где сохраняються результаты установок треков через YouTube (src/.status_count.txt) по умолчанию";
+
     * STATUS_TEXT = "Текст для FRONTEND (class="status-text") (Песни автоматически переключаются и загружаются через YouTube.) по умолчанию";
+
     * STATUS_YT = "Текст для распознования песни что он загружен из YouTube для FRONTEND (-YT9) по умолчанию";
 
     - Заметье, без этих настроек сервис НЕ БУДЕТ РАБОТАТЬ должным образом.
 
 ### **📑 main.py:**
-    * TOOLS = ToolsTrack(directory_path=MUSIC_PATH) (Работа с файовой системой), советуеться включить logging_mode=True;
-    * YOUTUBE = YouTubeDL(directory_path=MUSIC_PATH) (Работа со сторонними модулям (YouTube)), советуеться включить logging_mode=True;
+    * TOOLS = ToolsTrack(directory_path=MUSIC_PATH) (Работа с файловой системой);
+
+    * YOUTUBE = YouTubeDL(directory_path=MUSIC_PATH) (Работа со сторонними модулям YouTube);
+
     * TEMP_VAR = "TEMP-VARIABLE" (ВРЕМЕННОЕ ХРАНИЛИЩЕ ВРЕМЕННЫХ ДАННЫХ (НЕ УДАЛЯТЬ | def search()));
-    * app.run(debug=True, host=HOST, port=PORT) (debug=True - Будет показывать ошибки прямо на сайте в релизах стоит отключить);
+
+    * app.run(host=HOST, port=PORT) (debug=True - Будет показывать ошибки прямо на сайте в релизах стоит отключить);
+
     - Для подключения сертификатов домена к плееру, важно указать certfile="сертификат.crt", keyfile="ключ.key";
     
     - Заметье, без этих настроек сервис НЕ БУДЕТ РАБОТАТЬ должным образом.
 
 ### **📑 src/tools.py:**
     * _get_playlist(self, link: str, rending_count: int = 5, rending_timeout: int = 60);
+
     - МОДУЛЬ ОТКЛЮЧЕН, рабочий | по ссылке плейлиста получает ссылки на все треки в плейлисте (HTMLSession());
 
     - Заметье, без этих настроек сервис НЕ БУДЕТ РАБОТАТЬ должным образом.
@@ -176,12 +200,21 @@ sudo pacman -Syu git python3 && git clone https://github.com/DataSC3/web-player.
 ### **📑 templates/index.html:**
     * Доступны закоментированные блоки управления аудио-плеером (Переключение трека, вкл./выкл.)
     
-
 ### **💌 Особенности:**
-    * Автозагрузка треков отключена, но в любой момент вы сможете ее включить через static/functions.js, но он играет маловажную роль ибо, 
+    * Автовоспроизведение треков отключена, но в любой момент вы сможете ее включить через static/functions.js, но он играет маловажную роль ибо, 
     задействован авт. переключение треков и сама функция Автозагрузки была отключения из-за оптимизации, когда у вас будет более 500 треков.;
 
     * Красивый, удобный и минималестичный интерфейс с анимациями;
+
     * status-text показывает статус работы плеера, напр. когда что-то пошло не так или сколько треков установилось из плейлиста (с помощью self.STATUS_COUNT_FILE)
 
+### **🚀 Как запустить?:**
+* После устновки первым очередем, убедитесь что все модули уже установлены (запустите setup.py).
 
+1. ```python3 setup.py```
+2. ```python3 start.py```
+(Рекомендуется)
+
+ИЛИ 
+
+3. ```python3 main.py```

@@ -36,6 +36,12 @@ img {cursor: pointer;}
 }
 
 
+.button-description {
+  margin-left: 5px;
+  cursor: pointer;
+  font-size: 90%;
+  opacity: 0.7;
+}
 
 .program-description {
   margin-bottom: 25px;
@@ -44,11 +50,88 @@ img {cursor: pointer;}
   color: rgba(240, 248, 255, 0.49);
 }
 
-/* .header {
+.header-panel {
   display: flex;
-  justify-content: space-around;
-}*/
+  flex-direction: column-reverse;
+}
 
+.settings-panel img {
+  opacity: 0.1;
+}
+.settings-panel img:hover {
+  opacity: 0.5;
+}
+
+.login {
+  display: flex;
+  margin-right: 10px;
+  align-items: center;
+  padding-left: 10px;
+  border-radius: 4px;
+  border: 1px solid #ffffff1c;
+}
+
+.login-input {
+  width: 40px;
+  height: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  outline: none;
+}
+
+.login-input:focus {
+  border: none; /* Убирает обводку при фокусе */
+  outline: none; /* Убирает фокусную обводку */
+}
+
+.login-input::placeholder {
+  font-size: 90%;
+}
+
+.block-hover:hover {
+  opacity: 0.5;
+}
+
+.timer {
+  padding: 10px;
+  background: #4f73fd33;
+  border-radius: 5px;
+  margin-right: 10px;
+  display: flex;
+  height: 27px;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0.8;
+}
+.timer-input {
+  width: 40px;
+  height: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  outline: none;
+}
+.timer-input:focus {
+  border: none; /* Убирает обводку при фокусе */
+  outline: none; /* Убирает фокусную обводку */
+}
+
+.timer-input::placeholder {
+  font-size: 90%;
+}
+
+.settings-panel {
+  padding-bottom: 18px;
+  border-bottom: 3px dashed #ffffff0f;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.settings-panel img:not(:first-child) {
+  margin-left: 10px; /* Установите нужное значение отступа */
+}
 
 .playeer-menu {
   display: flex;
@@ -184,4 +267,41 @@ input::placeholder {
     font-size: 85%;
   }
 
+}
+/* Стили для мобильных устройств */
+@media only screen and (max-width: 550px) {
+  .button-description {
+    display: none;
+  }
+}
+
+/* Стили для мобильных устройств */
+@media only screen and (max-width: 350px) {
+  .playeer-menu img{
+    width: 25px;
+  }
+    
+  .playeer-menu {
+    height: 45px;
+  }
+
+  .status-text {
+    font-size: 15px;
+  }
+
+  .music-name {
+    font-size: 14px;
+  }
+
+  .program-description {
+    font-size: 14px;
+  }
+
+  .audioPlayer {
+    height: 40px;
+  }
+
+  .login-status {
+    font-size: 14px;
+  }
 }

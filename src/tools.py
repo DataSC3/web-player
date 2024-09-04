@@ -5,7 +5,9 @@ import platform
 import subprocess
 from typing import List
 from secrets import token_hex
-from src.config import STATUS_COUNT_FILE, STATUS_YT
+from src.config import (STATUS_COUNT_FILE, 
+                        STATUS_YT, LOGGING_MODE,
+                        AUDIO_EXTENSIONS)
 
 # СТОРОННИЕ ИМПОРТЫ (3)
 from requests_html import HTMLSession
@@ -17,10 +19,10 @@ from yt_dlp import YoutubeDL
 # Отключение логирования у yt_dlp 
 class YtCustomLogger:
     """Отключение логирования у yt_dlp"""
-    def debug(self, msg): pass
-    def info(self, msg): pass
     def warning(self, msg): pass
     def error(self, msg): pass
+    def debug(self, msg): pass
+    def info(self, msg): pass
 
 # РАБОТА С ИНСТРУМЕНТАМИ ПОДДЕРЖКИ СОФТА
 class ToolsTrack:
@@ -31,19 +33,28 @@ class ToolsTrack:
     длины названии трека ДЛЯ ПК. (50)"""
 
     MAX_MOBILE_NAME_LENGTH: int = 20
-    MAX_PC_NAME_LENGTH: int = 50
+    MAX_PC_NAME_LENGTH: int = 70
     
     # Установка логирования 
     logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
     
-    def __init__(self, directory_path: str, logging_mode: bool = False) -> None:
+    def __init__(self, directory_path: str) -> None:
         """Работа с модулям треков.\n
         :param: `directory_path | STR` - Путь к хранилище треков. (path/to/folder/) \n\n
         :param: `logging_mode | BOOL` - Режим логирования.\n
         :modul: `get_tracks` - Получение треков из хранилища в виде списка.\n
         """
         self.directory_path: str = directory_path
-        self.logging_mode: bool = logging_mode
+        self.logging_mode: bool = LOGGING_MODE
+
+    # Удаляем расширение из имени трека
+    def _remove_extension(self, song: str, extensions: list) -> str:
+        """Удаляет расширение из имени"""
+        for ext in extensions:
+            if song.endswith(ext): return song.replace(ext, '')
+        
+        # Вдыем результат
+        return song
 
     # Получение списка треков
     def _tracks_list(self, user_agent: str = None, mix: bool = False) -> List[list]:
@@ -60,14 +71,13 @@ class ToolsTrack:
         try: 
             # Список с треками (с расширением .mp3)
             # .replace(YouTubeDL.TRACK_YOUTUBE_DOWNLOADED_FLAG, "")
-            songs_list: list = [song for song in os.listdir(self.directory_path) if ".mp3" in song or ".webm" in song]
-        
+            songs_list: list = [song for song in os.listdir(self.directory_path) if any(song.endswith(ext) for ext in AUDIO_EXTENSIONS)]
+            
         # Если позникла ошибка из-за пути к хранилищу треков | режим логирования
         except (NotADirectoryError, FileNotFoundError) as NotDirectoryError:
-            
             # Режим логирования
             if self.logging_mode: 
-                logging.error(F"Ошибка пути или указанный путь не является директорией: {NotDirectoryError}")
+                print(F"[!] Ошибка пути или указанный путь не является директорией: {NotDirectoryError}")
             
             return list()
 
@@ -82,14 +92,20 @@ class ToolsTrack:
                 
                 # Режим логирования
                 if self.logging_mode: 
-                    logging.info(F"Найдено: {len(songs_list)}, треков в директории: {self.directory_path}")
+                    print(F"[*] Найдено: {len(songs_list)}, треков в директории: {self.directory_path}")
                 
-                # Имя трека не имеет расширение (.mp3) и содержит не более [self.MAX_MOBILE_NAME_LENGTH] символов (Для мобильных устройств)
-                songs: list = [[F"{song.replace('.mp3', '').replace(STATUS_YT, '')[0:self.MAX_MOBILE_NAME_LENGTH]}..", song] if not STATUS_YT in song else
-                              [F"{STATUS_YT}{song.replace('.mp3', '')[0:self.MAX_MOBILE_NAME_LENGTH]}..", song] for song in songs_list]
+                # Имя трека не имеет расширение (.mp3 и тд) и содержит не более [self.MAX_MOBILE_NAME_LENGTH] символов (Для мобильных устройств)
+                songs: list = [[F"{self._remove_extension(song, AUDIO_EXTENSIONS).replace(STATUS_YT, '')[0:self.MAX_MOBILE_NAME_LENGTH]}..", song] 
+                    if not STATUS_YT in song 
+                    else [F"{STATUS_YT}{self._remove_extension(song, AUDIO_EXTENSIONS)[0:self.MAX_MOBILE_NAME_LENGTH]}..", song] 
+                    for song in songs_list]
+                
+                # # Имя трека не имеет расширение (.mp3) и содержит не более [self.MAX_MOBILE_NAME_LENGTH] символов (Для мобильных устройств)
+                # songs: list = [[F"{song.replace('.mp3', '').replace(STATUS_YT, '')[0:self.MAX_MOBILE_NAME_LENGTH]}..", song] 
+                #         if not STATUS_YT in song 
+                #         else [F"{STATUS_YT}{song.replace('.mp3', '')[0:self.MAX_MOBILE_NAME_LENGTH]}..", song] for song in songs_list]
                 
 
-                # songs = [["JONY, EMIN - Лунная..", "JONY, EMIN - Лунная ночь.mp3"]]
                 return songs
             
             # Вы зашли с ПК
@@ -99,13 +115,14 @@ class ToolsTrack:
                 
                 # Режим логирования
                 if self.logging_mode: 
-                    logging.info(F"Найдено: {len(songs_list)}, треков в директории: {self.directory_path}")
+                    print(F"[*] Найдено: {len(songs_list)}, треков в директории: {self.directory_path}")
                     
                 # Имя трека не имеет расширение (.mp3) и содержит не более [self.MAX_PC_NAME_LENGTH] символов (Для ПК)
-                songs: list = [[F"{song.replace('.mp3', '').replace(STATUS_YT, '')[0:self.MAX_PC_NAME_LENGTH]}..", song] if not STATUS_YT in song else
-                              [F"{STATUS_YT}{song.replace('.mp3', '')[0:self.MAX_PC_NAME_LENGTH]}..", song] for song in songs_list]
+                songs: list = [[F"{self._remove_extension(song, AUDIO_EXTENSIONS).replace(STATUS_YT, '')[0:self.MAX_PC_NAME_LENGTH]}..", song] 
+                    if not STATUS_YT in song 
+                    else [F"{STATUS_YT}{self._remove_extension(song, AUDIO_EXTENSIONS)[0:self.MAX_PC_NAME_LENGTH]}..", song] 
+                    for song in songs_list]
                 
-                # songs = [["JONY, EMIN - Лунная ночь", "JONY, EMIN - Лунная ночь.mp3"]]
                 return songs
         
         else:
@@ -113,7 +130,7 @@ class ToolsTrack:
             if mix: random.shuffle(songs_list)
 
             # Имя трека не имеет расширение (.mp3) и содержит не более [self.MAX_PC_NAME_LENGTH] символов (Для ПК)
-            songs: list = [[F"{song.replace('.mp3', '')}", song] for song in songs_list]
+            songs: list = [[F"{self._remove_extension(song, AUDIO_EXTENSIONS)}", song] for song in songs_list]
             
             # songs = [["JONY, EMIN - Лунная ночь", "JONY, EMIN - Лунная ночь.mp3"]]
             return songs
@@ -172,9 +189,9 @@ class ToolsTrack:
         # Удаление трека и вывод логирования (Если ВКЛ.)
         try: os.remove(path=self.directory_path + filename)
         except FileNotFoundError as error: 
-            if self.logging_mode: logging.error("Ошибка удаления трека с названием:", filename, error)
+            if self.logging_mode: print(F"[!] Ошибка удаления трека с названием: {filename} / {error}")
         else:
-            if self.logging_mode: logging.info("Удалён трек с названием:", filename)
+            if self.logging_mode: print(F"[-] Удалён трек с названием: {filename}")
 
         # Возвращаем список треков из хранилища
         return self._tracks_list(user_agent=user_agent)
@@ -196,7 +213,7 @@ class ToolsTrack:
                 return True
 
             except Exception as error:
-                logging.error(F"Не удалось получить количество недавно сохраненных треков: {error}")
+                print(F"[!] Не удалось получить количество недавно сохраненных треков: {error}")
                 return False
 
         # Иначе выдаем количество новых треков
@@ -213,7 +230,7 @@ class ToolsTrack:
                     return new_tracks_count
 
             except Exception as error:
-                logging.error(F"Не удалось получить количество недавно сохраненных треков: {error}")
+                print(F"[!] Не удалось получить количество недавно сохраненных треков: {error}")
                 return "0"
 
 
@@ -239,12 +256,12 @@ class YouTubeDL:
     # Установка логирования 
     logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 
-    def __init__(self, directory_path: str = None, logging_mode: bool = False) -> None:
+    def __init__(self, directory_path: str = None) -> None:
         """Инициализация объекта класса YouTube.
         :param: `directory_path | STR` - Путь к хранилище треков. (path/to/folder/) \n\n
         :param: `logging_mode | BOOL` - Режим логирования.\n"""
 
-        self.logging_mode: bool = logging_mode
+        self.logging_mode: bool = LOGGING_MODE
         self.directory_path: str = directory_path
 
     # Получение всех ссылок на песни из плейлиста YouTube
@@ -258,7 +275,7 @@ class YouTubeDL:
         """
     
         # Начало сканирования плейлиста
-        if self.logging_mode: logging.info("Начинаем сканирование плейлиста:%s", link)
+        if self.logging_mode: print(F"[*] Начинаем сканирование плейлиста: {link}")
         
         while rending_count:
             try: 
@@ -274,17 +291,17 @@ class YouTubeDL:
                     for music_url in response.html.links 
                     if '/watch' in music_url]
                 
-                if self.logging_mode: logging.info("Успешный рендеринг страницы, получено %s%s", len(music_url_list), "треков.")
+                if self.logging_mode: print(F"[#] Успешный рендеринг страницы, получено: {len(music_url_list)} треков.")
                 return music_url_list
 
             except Exception as error:
                 # Обработка ошибок при рендеринге страницы
-                logging.error(F"Ошибка рендеринга страницы, делаем повтор. {error}")
+                print(F"[!] Ошибка рендеринга страницы, делаем повтор. {error}")
                 rending_count -= 1
                 continue
     
     # Скачивание трека с YouTube по ссылке
-    def _download_youtube_audio(self, link: str) -> bool:
+    def _download_youtube_audio(self, link: str, account_path: str = None) -> bool:
         """
         Скачивание трека с YouTube по ссылке. | modul: yt-dlp | .webm (Format)
 
@@ -295,10 +312,13 @@ class YouTubeDL:
         :return: bool
         """
         
+        if account_path: account_path: str = account_path
+        else: account_path: str = self.directory_path
+
         try:
             # Опции для YTDLP + Отключение логирования
             youtube_options: dict = {'format': 'ba',
-            'outtmpl': self.directory_path + '%(title)s.%(ext)s',
+            'outtmpl': account_path + self.TRACK_YOUTUBE_DOWNLOADED_FLAG + '%(title)s.%(ext)s',
             'logger': YtCustomLogger()}
 
             # Запускаем загрузку трек явно и ожидаем ее завершения
@@ -307,12 +327,12 @@ class YouTubeDL:
                 ydl.download([link])
         
             # Логирование результата 
-            if self.logging_mode: logging.info(F"Трек (-и) успешно установились в: {self.directory_path}")    
+            if self.logging_mode: print(F"[#] Трек (-и) успешно установились в: {account_path}")
             return True
             
         # Если возникла ошибка
         except Exception as error:
-            logging.error(F"Ошибка при работе: {__name__} {error}")
+            print(F"[!] Ошибка при работе: {__name__} / {error}")
             return False
 
     # Проверяет установлен ли FFmpeg на устройство
@@ -329,14 +349,14 @@ class YouTubeDL:
             
             # Если FFmpeg установлен
             if result.returncode == 0:
-                if self.logging_mode: logging.info("FFmpeg доступен в вашей операционной системе [Linux]")
+                if self.logging_mode: print(F"[#] FFmpeg доступен в вашей операционной системе [Linux]")
                 return True
             
             # Если FFmpeg НЕ установлен
             else:
                 if self.logging_mode: 
-                    logging.error("FFmpeg НЕ доступен в вашей операционной системе [Linux]")
-                    logging.info("Пожалуйста, установите FFmpeg на вашу систему [Linux] для использовании %s", self.__class__.__name__)
+                    print(F"[!] FFmpeg НЕ доступен в вашей операционной системе [Linux]")
+                    print(F"[?] Пожалуйста, установите FFmpeg на вашу систему [Linux] для использовании — {self.__class__.__name__}")
                 
                 return False
 
@@ -346,14 +366,14 @@ class YouTubeDL:
             
             # Если FFmpeg установлен
             if result.returncode == 0:
-                if self.logging_mode: logging.info("FFmpeg доступен в вашей операционной системе [MacOS]")
+                if self.logging_mode: print(F"[#] FFmpeg доступен в вашей операционной системе [MacOS]")
                 return True
             
             # Если FFmpeg НЕ установлен
             else:
                 if self.logging_mode: 
-                    logging.error("FFmpeg НЕ доступен в вашей операционной системе [MacOS]")
-                    logging.info("Пожалуйста, установите FFmpeg на вашу систему [MacOS] для использовании %s", self.__class__.__name__)
+                    print(F"[!] FFmpeg НЕ доступен в вашей операционной системе [MacOS]")
+                    print(F"[?] Пожалуйста, установите FFmpeg на вашу систему [MacOS] для использовании — {self.__class__.__name__}")
                 
                 return False
 
@@ -363,27 +383,27 @@ class YouTubeDL:
             
             # Если FFmpeg установлен
             if result.returncode == 0:
-                if self.logging_mode: logging.info("FFmpeg доступен в вашей операционной системе [Windows]")
+                if self.logging_mode: print(F"[#] FFmpeg доступен в вашей операционной системе [Windows]")
                 return True
             
             # Если FFmpeg НЕ установлен
             else:
                 if self.logging_mode: 
-                    logging.error("FFmpeg НЕ доступен в вашей операционной системе [Windows]")
-                    logging.info("Пожалуйста, установите FFmpeg на вашу систему [Windows] для использовании %s", self.__class__.__name__)
+                    print(F"[!] FFmpeg НЕ доступен в вашей операционной системе [Windows]")
+                    print(F"[?] Пожалуйста, установите FFmpeg на вашу систему [Windows] для использовании — {self.__class__.__name__}")
                 
                 return False
         
         # Если система не поддерживает FFmpeg
         else:
             if self.logging_mode: 
-                logging.error("Ваша система НЕ поддерживает FFmpeg!")
-                logging.info("Пожалуйста, прочтите документацию по установке FFmpeg на вашу систему. Фунция %s %s", self.__class__.__name__, "не доступна.")
+                print(F"[!] Ваша система НЕ поддерживает FFmpeg!")
+                print(F"[?] Пожалуйста, прочтите документацию по установке FFmpeg на вашу систему. Фунция — {self.__class__.__name__} не доступна.")
                 
             return False
 
     # Конвертирует .wedm файл в .mp3
-    def _conver_webm_to_mp3(self) -> bool:
+    def _conver_webm_to_mp3(self, account_path: str = None) -> bool:
         """Конвертирует .wedm файл в .mp3
         При создании файла даеться рандомное HEX имя с флагом self.TRACK_YOUTUBE_DOWNLOADED_FLAG (
             Важно: Данный флаг требуется для распознования ФРОНТЕНДОМ,
@@ -392,48 +412,51 @@ class YouTubeDL:
         :param: `filename | STR` - Название файла который нужно конвертировать.\n
         :return: bool
         """
+        if account_path: account_path: str = account_path
+        else: account_path: str = self.directory_path
+
         try:
             # Получаем все скаченные треки из папки которые имеют расширение .webm
-            tracks_list = [track for track in os.listdir(self.directory_path) if ".webm" in track]
+            tracks_list = [track for track in os.listdir(account_path) if ".webm" in track or ".m4a" in track]
 
             # Сохроняем скаченное кол-во треков в файл для дальнейшей работе с Front.
-            trackToolsClass = ToolsTrack(directory_path=self.directory_path)
+            trackToolsClass = ToolsTrack(directory_path=account_path)
             trackToolsClass.count_new_tracks(new_tracks=len(tracks_list))
 
             # Если список треков имеються:
             if tracks_list:
                 for webm_file in tracks_list:
-                    webm_file_path = self.directory_path + webm_file
+                    webm_file_path = account_path + webm_file
                     
-                    audio = AudioSegment.from_file(file=webm_file_path, format="webm")
+                    audio = AudioSegment.from_file(file=webm_file_path, format="m4a")
 
                     for symbols in ["?", '"', "'", "/", ":", "#", "|", ",", " | ", "<", ">", "*"]:                         
                         webm_file = webm_file.replace(symbols, "")
                     
-                    new_file_name: str = self.directory_path + self.TRACK_YOUTUBE_DOWNLOADED_FLAG + webm_file + ".mp3"
+                    new_file_name: str = account_path + webm_file + ".mp3"
 
                     # Сохранение файла как .mp3
-                    audio.export(new_file_name.replace(".webm", ""), format="mp3")
+                    audio.export(new_file_name.replace(".webm", "").replace(".m4a", ""), format="mp3")
 
                     # Вывод логирования и удаление .webm
-                    if self.logging_mode: logging.info("Конвертация / удаление .webm файла, прошла успешно и сохранен в %s", new_file_name)
+                    if self.logging_mode: print(F"[-] Конвертация / удаление файла, прошла успешно и сохранен в {new_file_name}")
                     os.remove(webm_file_path)
             
             # Если треки в папке не найдены
             else:
-                if self.logging_mode: logging.info(F"Не найдено треков в папке: {self.directory_path}")
+                if self.logging_mode: print(F"[?] Не найдено треков в папке: {account_path}")
                 return False
 
-            if self.logging_mode: logging.info(F"Все треки {len(tracks_list)} из плейлиста успешно загрузились!")
+            if self.logging_mode: print(F"[*] Все треки {len(tracks_list)} из плейлиста успешно загрузились!")
             return True
 
         # Вывод логирования об ошибке при конвертации
         except Exception as error:
-            logging.error(F"Ошибка при конвертации, по причине: {self.directory_path}, {error}")
+            print(F"[!] Ошибка при конвертации, по причине: {account_path} / {error}")
             return False
 
     # Точка входа в сервис по получении, установке и конвертации треков
-    def main(self, link: str = None, rending_count: int = 5, rending_timeout: int = 60) -> bool:
+    def main(self, link: str = None, rending_count: int = 5, rending_timeout: int = 60, account_path: str = None) -> bool:
         """Точка входа в сервис по получении, установке и конвертации треков
 
         :param: `link | STR` - Ссылка на трек или плейлист
@@ -448,32 +471,30 @@ class YouTubeDL:
         if '/playlist' in link and self._check_ffmpeg_installed() and link != None:
             
             # Логирование
-            if self.logging_mode: logging.info("Ссылка введет на плейлист:%s ", link)
+            if self.logging_mode: print(F"[#] Ссылка введет на плейлист: {link}")
 
             # Получение всех ссылок на песни из плейлиста YouTube НЕ ТРЕБУЕТЬСЯ (YT-DLP САМ ВСЕ ДЕЛАЕТ)
             # playlist_links: list =  #self._get_playlist(link=link, rending_count=rending_count, rending_timeout=rending_timeout)
-            
+
             # Скачиваем песни из плейлиста
-            self._download_youtube_audio(link=link)
-            
-            # Конвертируем трек (.wbem -> .mp3)
-            self._conver_webm_to_mp3()
+            self._download_youtube_audio(link=link, account_path=account_path)
+            self._conver_webm_to_mp3(account_path=account_path)
             
 
-        if link != None:
+        if link:
             # Логирование
-            if self.logging_mode: logging.info("Ссылка введет на трек:%s ", link)
+            if self.logging_mode: print(F"[#] Ссылка введет на трек: {link}")
             
             # Удаление не нужных символов и получение ID видео
             if '&list' in link: link = link.split("&")[0].split("=")[-1]
             else: link = link.split("=")[-1]
 
             # Скачивание конвертация (.webm -> .mp3) треков 
-            self._download_youtube_audio(link=link)
-            self._conver_webm_to_mp3()
+            self._download_youtube_audio(link=link, account_path=account_path)
+            self._conver_webm_to_mp3(account_path=account_path)
 
         else: 
-            if self.logging_mode: logging.info("Передайте ссылку для скачивания!")
+            if self.logging_mode: print(F"[#] Передайте ссылку для скачивания!")
 
 
 if __name__ == "__main__":

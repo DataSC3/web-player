@@ -6,17 +6,47 @@
     <title>Music Player</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/style.css">
-
 </head>
+
 <body>
     <div class="wrapper">
         <div class="header">
-            <h1 class="program-name"><b><span style="color: orange">MY</span> PLAYEER</b></h1>
+            <div class="header-panel">
+                <h1 class="program-name" style="display: flex; margin-bottom: 0; margin-top: 10px;">
+                    <b><span style="color: orange">MY</span> PLAYEER</b>
+                    <div class="version" style="font-size: 10px; font-family: sans-serif; font-weight: 100; color: #fdfffe5e;">{{version}}</div>
+                </h1>
+                <div class="settings-panel">
+                    
+                    <!-- Поля авторизации -->
+                    <div class="login" style="display: none;">
+                        <div style="font-size: 13px;" class="login-status">Аккаунт</div>
+                        <div style="margin-left: 5px; margin-right: 5px; opacity: 0.2;"> | </div>
+                        <input type="text" class="login-input" maxlength="9" placeholder="..." style="width: 90px;" onblur="loginUser()">
+                    </div>
+
+                    <!-- Поля таймера -->
+                    <div class="timer" style="display: none;">
+                        <div style="font-size: 13px;" class="timer-status">Сон / Минуты</div>
+                        <div style="margin-left: 5px; margin-right: 5px; opacity: 0.2;"> | </div>
+                        <input type="text" class="timer-input" maxlength="2" placeholder="..." style="width: 25px;" 
+                            onblur="timerStart();" 
+                            oninput="validateTimerInput(this);">
+                    </div>
+
+                    <img src="/static/icon/moon.svg" id="timer" width="27px" onclick="timerHandler();">
+                    <img src="/static/icon/account.svg" id="account" width="27px" onclick="loginHandler();">
+                    <img src="/static/icon/exit.svg" id="exit" width="27px" style="display: none;" onclick="window.location.href = '/';">
+
+                </div>
+
+            </div>
+
             <p class="program-description">
                 Бесплатный веб-сервис для потокового воспроизведения собственных песен. От разработчика 
                 <a style="text-decoration: none; color: rgb(63, 114, 232);" href="https://github.com/DataSC3">DataSC3.</a>
             </p>
-            <!-- <br> -->
+
             <p class="status-block">
                 <span class="loading" id="status-loading"></span>
                 <img id="status-text-icon" src="/static/icon/status-true.svg" width="20px"> 
@@ -29,11 +59,26 @@
             <input class="search-input" type="text" placeholder="Введите ссылку на YouTube трек:">
             
             <div class="line"></div>
-            <div class="search-forward" id="search-forward" onclick="showSearchBlock()"><img src="/static/icon/search.svg" width="30"></div>
-            <div class="close-forward" onclick="hideSearchBlock()" style="display: none; background-color: rgba(0, 0, 0, 0.2); border-radius: 8px;"><img src="/static/icon/close.svg" width="30"></div>
+            <div class="search-forward block-hover" id="search-forward" onclick="showSearchBlock()" style="display: flex; align-items: center;">
+                <img src="/static/icon/search.svg" width="30">
+                <div class="button-description">Поиск</div>
+            </div>
 
-            <div class="mix-forward" style="opacity: 0.3;"><img src="/static/icon/mix.svg" width="30"></div>
-            <div class="update" onclick="window.location.href = '/';" ><img src="/static/icon/update.svg" width="30"></div>
+
+            <div class="close-forward" onclick="hideSearchBlock();" style="display: none; background-color: rgba(0, 0, 0, 0.2); border-radius: 8px;">
+                <img src="/static/icon/close.svg" width="30">
+            </div>
+
+            <div class="mix-forward block-hover" style="opacity: 0.3; display: flex; align-items: center;">
+                <img src="/static/icon/mix.svg" width="30">
+                <div class="button-description">Смешать</div>
+            </div>
+            
+            
+            <div class="update block-hover" onclick="window.location.href = window.location.href;" style="display: flex; align-items: center;">
+                <img src="/static/icon/update.svg" width="30">
+                <div class="button-description">Обновить</div>
+            </div>
             <div class="music-count" style="opacity: 0.3;">
                 <img src="/static/icon/music.svg" style="cursor: default;" width="30">
                 <div class="music-count-data-block">
@@ -53,12 +98,29 @@
             <!-- <div class="right-block" style="display: flex; align-items: center; justify-content: space-around; width: 13%;"></div> -->
             <!-- <div class="stop-forward" onclick="stopStartAudio()"><img src="/static/icon/stop.svg" width="30"></div> -->
             
-            <div class="search-forward" id="search-forward" onclick="showSearchBlock()"><img src="/static/icon/search.svg" width="30"></div>
+            <!-- КНОПКА ПОИСК -->
+            <div class="search-forward block-hover" id="search-forward" onclick="showSearchBlock()" style="display: flex; align-items: center;">
+                <img src="/static/icon/search.svg" width="30">
+                <div class="button-description">Поиск</div>
+            
+            </div>
+            
+            <!-- КНОПКА ЗАКРЫТЬ -->
             <div class="close-forward" onclick="hideSearchBlock()" style="display: none; background-color: rgba(0, 0, 0, 0.2); border-radius: 8px;"><img src="/static/icon/close.svg" width="30"></div>
             
             <!-- ДОБВАИТЬ СЮДА -->
-            <div class="mix-forward" onclick="window.location.href = '/mix-track';"><img src="/static/icon/mix.svg" width="30"></div>
-            <div class="update" onclick="window.location.href = '/';" ><img src="/static/icon/update.svg" width="30"></div>
+            <!-- КНОПКА СМЕШАТЬ -->
+            <div class="mix-forward block-hover" onclick="window.location.href = '/mix-track';" style="display: flex; align-items: center;">
+                <img src="/static/icon/mix.svg" width="30">
+                <div class="button-description">Смешать</div>
+            </div>
+            
+            <!-- КНОПКА ОБНОВИТЬ -->
+            <div class="update block-hover" onclick="window.location.href = window.location.href;" style="display: flex; align-items: center;">
+                <img src="/static/icon/update.svg" width="30">
+                <div class="button-description">Обновить</div>
+            </div>
+            
             <div class="music-count">
                 <img src="/static/icon/music.svg" style="cursor: default;" width="30">
                 <div class="music-count-data-block">
@@ -75,7 +137,13 @@
                 {% if not songs %}
                 <div class="playeer-item">
                     <div class="playeer-header" style="margin-bottom: 0; display: flex; justify-content: center; align-items: center;">
-                        <span class="music-name">В КАТАЛОГЕ ОТСУТСТВУЮТ ПЕСНИ!.</span>
+                        <span class="music-name" style="
+                            font-family: Avenir Next; color: rgba(255, 255, 255, 0.47);
+                            width: 100%; display: flex; align-items: center;">
+                            
+                            <img src="/static/icon/empty.svg" style="width: 30px; opacity: 0.7; margin-right: 10px;">
+                            В папке нет треков!.
+                        </span>
                     </div>
                 </div>    
                 {% endif %}
@@ -94,16 +162,19 @@
                         </div>
                     
                     </div>
+                    
                     <audio controls id="audioPlayeer_{{ loop.index }}" class="audioPlayer" data-src="/music/{{ song[1] }}" style="background-color: rgb(112, 112, 112); border-radius: 10px; width: 100%;">
                         <source type="audio/mpeg">
+                        <source src="/music/{{ song[1] }}" type="audio/mpeg">
+                        <source src="/music/{{ song[1] }}" type="audio/ogg">
+                        <source src="/music/{{ song[1] }}" type="audio/mp4">
                         Ваш браузер не поддерживает элемент audio.
-                        <!-- src="/music/{{ song[1] }}" -->
                     </audio>
                 </div>
                 {% endfor %}
                 
             </div>
-            <script src="/static/functions.js"></script>
+            <script src="/static/functions.js?"></script>
         </div>
     </div>
 </body>

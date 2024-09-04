@@ -47,7 +47,7 @@ def requirements(module: str = None, description: str = None, link: str = None):
 
     try:
         # Выбор пользователя об установке модуля
-        choice = input(F"[*] {COLORS['YELLOW']}Установить модуль pydub? (y/n):{COLORS['ENDC']} ")
+        choice = input(F"[*] {COLORS['YELLOW']}Установить модуль {module}? (y/n):{COLORS['ENDC']} ")
         
         # Пользователь решил установить
         if choice.lower() == 'y' or choice.lower() == 'н':
@@ -65,7 +65,10 @@ def requirements(module: str = None, description: str = None, link: str = None):
         else:
             print(F"[*] Операция установки {module} отменена.")
             exit()
-    
+        
+        clear_terminal()
+        print(F"[*] {COLORS['GREEN']}Модуль успешно установлен!{COLORS['ENDC']}\n")
+
     # ОБРАБОТКА CRTL + C
     except KeyboardInterrupt as keyError: 
         print(F"\n[*] Операция установки {module} отменена.")
@@ -73,8 +76,12 @@ def requirements(module: str = None, description: str = None, link: str = None):
 
 # Проверка установки FFmpeg
 def ffmpeg_requirements():
-    clear_terminal()
     
+    # Очистка терминала
+    
+    # Первое сообщение
+    print(F"[*] {COLORS['YELLOW']}Проверка системы на наличие: {COLORS['BLUE']}FFmpeg..{COLORS['ENDC']}\n")
+
     # Проверка установки FFmpeg
     ffmpeg_status = YouTubeDL()._check_ffmpeg_installed()
     
@@ -83,7 +90,7 @@ def ffmpeg_requirements():
         print(F"[+] {COLORS['GREEN']}FFmpeg доступен в вашей системе: {COLORS['ENDC']}{ffmpeg_status=}")
     
     else:
-        print(F"[+] {COLORS['RED']}FFmpeg не установлен в вашу систему {COLORS['ENDC']}{ffmpeg_status=}!")
+        print(F"[+] {COLORS['RED']}FFmpeg не установлен на вашу систему {COLORS['ENDC']}{ffmpeg_status=}!")
         print(F"[+] {COLORS['BLUE']}Без него, ничего не будет работать..{COLORS['ENDC']}\n")
 
         try:
@@ -92,10 +99,10 @@ def ffmpeg_requirements():
         
             # Подробная инструкция
             if choice.lower() == 'y' or choice.lower() == 'н':
-                clear_terminal()
                 
+                clear_terminal()
                 # UBUNTU/DEBIAN
-                print(F"{COLORS['BLUE']}[+] UBUNTU/DEBIAN (40-50 МБ).{COLORS['ENDC']}")
+                print(F"{COLORS['BLUE']}[+] LINUX/UBUNTU/DEBIAN (40-50 МБ).{COLORS['ENDC']}")
                 print("[-] sudo apt update")
                 print("[-] sudo apt install ffmpeg\n")
 
@@ -139,9 +146,15 @@ def ffmpeg_requirements():
             print(F"\n[*] Операция установки FFmpeg отменена.")
             exit()
 
+
+
 # МОДУЛЬ PYDUB - Работает с конвертацией аудио
 clear_terminal()
-try: import pydub
+try: 
+    print(F"[+] {COLORS['YELLOW']}Проверка наличии модуля: {COLORS['BLUE']}Pydub (PyPI)..{COLORS['ENDC']}")
+    import pydub
+    print(F"[*] {COLORS['GREEN']}Модуль уже установлен!{COLORS['ENDC']}\n")
+
 except ImportError: requirements(
     module="pydub",
     link="https://pypi.org/project/pydub",
@@ -149,8 +162,12 @@ except ImportError: requirements(
     "Управляйте звуком с помощью простого и понятного интерфейса высокого уровня.")
 
 # МОДУЛЬ QUART - Асинхронный веб-фреймворк для Python (Альтернатива Flask) 
-clear_terminal()
-try: import quart
+try: 
+    print(F"[+] {COLORS['YELLOW']}Проверка наличии модуля: {COLORS['BLUE']}Quart (PyPI)..{COLORS['ENDC']}")
+    raise(ImportError)
+    import quart
+    print(F"[*] {COLORS['GREEN']}Модуль уже установлен!{COLORS['ENDC']}\n")
+
 except ImportError: requirements(
     module="Quart", 
     link="https://pypi.org/project/Quart",
@@ -161,8 +178,11 @@ except ImportError: requirements(
     "но предоставляющим асинхронные возможности. ")
 
 # МОДУЛЬ REQUESTS-HTML - Библиотека Python для парсигда JS на сайтах (Альтернатива BeautifullSoup4) 
-clear_terminal()
-try: import requests_html
+try: 
+    print(F"[+] {COLORS['YELLOW']}Проверка наличии модуля: {COLORS['BLUE']}RequestsHTML (PyPI)..{COLORS['ENDC']}")
+    import requests_html
+    print(F"[*] {COLORS['GREEN']}Модуль уже установлен!{COLORS['ENDC']}\n")
+
 except ImportError: requirements(
     module="requests-html", 
     link="https://pypi.org/project/requests-html",
@@ -172,9 +192,12 @@ except ImportError: requirements(
     "Она основана на библиотеке requests, которая предоставляет "
     "простой API для работы с HTTP, и pyquery, который является аналогом jQuery для Python.")
 
-# МОДУЛЬ REQUESTS-HTML - Форк библиотеки youtube-dlc (Установка видео с YouTube)
-clear_terminal()
-try: import yt_dlp
+# МОДУЛЬ YOUTUBER-DLP - Форк библиотеки youtube-dlc (Установка видео с YouTube)
+try: 
+    print(F"[+] {COLORS['YELLOW']}Проверка наличии модуля: {COLORS['BLUE']}YouTube-DLP (PyPI)..{COLORS['ENDC']}")
+    import yt_dlp
+    print(F"[*] {COLORS['GREEN']}Модуль уже установлен!{COLORS['ENDC']}\n")
+
 except ImportError: requirements(
     module="yt_dlp", 
     link="https://pypi.org/project/yt-dlp",
@@ -184,9 +207,23 @@ except ImportError: requirements(
     "и расширения функциональности youtube-dl, известной и широко "
     "используемой библиотеки для загрузки видео с Интернета.")
 
+# МОДУЛЬ HYPERCORN - Форк библиотеки hypercorn (Запуск WSG сервера)
+try: 
+    print(F"[+] {COLORS['YELLOW']}Проверка наличии модуля: {COLORS['BLUE']}Hyper-Corn (PyPI)..{COLORS['ENDC']}")
+    import hypercorn
+    print(F"[*] {COLORS['GREEN']}Модуль уже установлен!{COLORS['ENDC']}\n")
+
+except ImportError: requirements(
+    module="hypercorn", 
+    link="https://pypi.org/project/hypercorn",
+    description="HyperCorn это форк библиотеки hypercorn, "
+    "который предоставляет расширенные возможности для запуска WSG сервера"
+    "Команда для запуска: hypercorn main:app --bind 0.0.0.0:9000")
+
 # Проверка установки FFmpeg
 from src.tools import YouTubeDL
 ffmpeg_requirements()
+print(F"[%] {COLORS['GREEN']}Процесс установки модулей прошла {COLORS['BLUE']}успешно.{COLORS['ENDC']}")
 
 
 
