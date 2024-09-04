@@ -13,7 +13,7 @@
 
 
 ## 💻 ПК ВЕРСИЯ:
-![ПК Версия](src/git-resurces/pc-version.mp4)
+[![ПК Версия](src/git-resurces/pc-pic.png)]()
 
 ## 📱 МОБИЛЬНАЯ ВЕРСИЯ:
 [![Мобильная Версия](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/mobile-pic.png)](src/git-resources/mobile-version.mp4)
