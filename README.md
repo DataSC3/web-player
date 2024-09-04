@@ -34,7 +34,7 @@
 </video>
 
 ## 💬 ЛОГИРОВАНИЕ
-[![Логирование](src/git-resources/logging-pic.png)](https://www.dropbox.com/scl/fi/023euydf209ixk2x5ny36/logging.mp4?rlkey=r7yip4i3qi0ffrwpw9dhmmvwp&st=q0std5ax&dl=0)
+[![Логирование](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/logging-pic.png)](https://www.dropbox.com/scl/fi/023euydf209ixk2x5ny36/logging.mp4?rlkey=r7yip4i3qi0ffrwpw9dhmmvwp&st=q0std5ax&dl=0)
 
 
 ### **🔖 Функционал плеера:**
