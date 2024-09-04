@@ -35,9 +35,9 @@
 
 ## 💬 ЛОГИРОВАНИЕ
 [Логирование](https://vimeo.com/1006036396?share=copy)
-<video width="320" height="240" controls>
-  <source src="src/git-resources/logging.mp4" type="video/mp4">
-  Ваш браузер не поддерживает видео.
+<video width="640" height="480" controls>
+  <source src="https://www.dropbox.com/scl/fi/023euydf209ixk2x5ny36/logging.mp4?rlkey=r7yip4i3qi0ffrwpw9dhmmvwp&st=71560l2a&raw=1" type="video/mp4">
+  Ваш браузер не поддерживает встроенные видео.
 </video>
 
 
