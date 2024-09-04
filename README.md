@@ -13,25 +13,23 @@
 
 
 ## 💻 ПК ВЕРСИЯ:
-[ПК Версия](https://www.dropbox.com/scl/fi/023euydf209ixk2x5ny36/logging.mp4?rlkey=r7yip4i3qi0ffrwpw9dhmmvwp&st=71560l2a&dl=0)
+[![ПК Версия](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/mobile-pic.png)](https://www.dropbox.com/scl/fi/023euydf209ixk2x5ny36/logging.mp4?rlkey=r7yip4i3qi0ffrwpw9dhmmvwp&st=71560l2a&dl=0)
 <video width="640" height="480" controls>
   <source src="https://www.dropbox.com/scl/fi/023euydf209ixk2x5ny36/logging.mp4?rlkey=r7yip4i3qi0ffrwpw9dhmmvwp&st=71560l2a&dl=0" type="video/mp4">
   Ваш браузер не поддерживает встроенные видео.
 </video>
 
 ## 📱 МОБИЛЬНАЯ ВЕРСИЯ:
-[Мобильная Версия](src/git-resources/mobile-version.mp4)
+[![Мобильная Версия](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/mobile-pic.png)](src/git-resources/mobile-version.mp4)
 <video width="320" height="240" controls>
   <source src="src/git-resources/mobile-version.mp4" type="video/mp4">
   Ваш браузер не поддерживает видео.
 </video>
 
 ## 🚀 ЗАПУСК
-[Запуск](src/git-resources/start.mp4)
-<video width="320" height="240" controls>
-  <source src="src/git-resources/start.mp4" type="video/mp4">
-  Ваш браузер не поддерживает видео.
-</video>
+[![Запуск](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/start-pic.png)](src/git-resources/start.mp4)
+
+
 
 ## 💬 ЛОГИРОВАНИЕ
 [![Логирование](https://github.com/DataSC3/web-player/blob/main/src/git-resurces/logging-pic.png)](https://www.dropbox.com/scl/fi/023euydf209ixk2x5ny36/logging.mp4?rlkey=r7yip4i3qi0ffrwpw9dhmmvwp&st=q0std5ax&dl=0)
