@@ -13,24 +13,28 @@
 
 
 ## 💻 ПК ВЕРСИЯ:
+[ПК Версия](src/git-resources/pc-version.mp4)
 <video width="320" height="240" controls>
   <source src="src/git-resources/pc-version.mp4" type="video/mp4">
   Ваш браузер не поддерживает видео.
 </video>
 
 ## 📱 МОБИЛЬНАЯ ВЕРСИЯ:
+[Мобильная Версия](src/git-resources/mobile-version.mp4)
 <video width="320" height="240" controls>
   <source src="src/git-resources/mobile-version.mp4" type="video/mp4">
   Ваш браузер не поддерживает видео.
 </video>
 
 ## 🚀 ЗАПУСК
+[Запуск](src/git-resources/start.mp4)
 <video width="320" height="240" controls>
   <source src="src/git-resources/start.mp4" type="video/mp4">
   Ваш браузер не поддерживает видео.
 </video>
 
 ## 💬 ЛОГИРОВАНИЕ
+[Логирование](src/git-resources/logging.mp4)
 <video width="320" height="240" controls>
   <source src="src/git-resources/logging.mp4" type="video/mp4">
   Ваш браузер не поддерживает видео.
