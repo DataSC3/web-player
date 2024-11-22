@@ -54,7 +54,7 @@ def requirements(module: str = None, description: str = None, link: str = None):
             try:
                 # Установка модуля
                 import subprocess
-                subprocess.check_call(['pip', 'install', module])
+                subprocess.check_call(['pip3', 'install', module])
             
             # Обработка ошибки при работе subprocess
             except Exception as error: 
@@ -164,7 +164,6 @@ except ImportError: requirements(
 # МОДУЛЬ QUART - Асинхронный веб-фреймворк для Python (Альтернатива Flask) 
 try: 
     print(F"[+] {COLORS['YELLOW']}Проверка наличии модуля: {COLORS['BLUE']}Quart (PyPI)..{COLORS['ENDC']}")
-    raise(ImportError)
     import quart
     print(F"[*] {COLORS['GREEN']}Модуль уже установлен!{COLORS['ENDC']}\n")
 
@@ -224,8 +223,3 @@ except ImportError: requirements(
 from src.tools import YouTubeDL
 ffmpeg_requirements()
 print(F"[%] {COLORS['GREEN']}Процесс установки модулей прошла {COLORS['BLUE']}успешно.{COLORS['ENDC']}")
-
-
-
-
-
