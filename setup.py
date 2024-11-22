@@ -54,7 +54,9 @@ def requirements(module: str = None, description: str = None, link: str = None):
             try:
                 # Установка модуля
                 import subprocess
-                subprocess.check_call(['pip3', 'install', module])
+
+                try: subprocess.check_call(['pip3', 'install', module])
+                except FileNotFoundError: subprocess.check_call(['pip', 'install', module])
             
             # Обработка ошибки при работе subprocess
             except Exception as error: 
